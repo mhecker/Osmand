@@ -32,6 +32,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import edu.kit.joana.ui.annotations.Source;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
@@ -136,8 +137,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	private OnItemClickListener listAdapterOnClickListener;
 	private SwipeDismissListViewTouchListener swipeDismissListener;
 
+	@Source(includes = "MapActivityOptionsMenuClicked", id="003")
 	private boolean visible = false;
+	@Source(includes = "MapActivityOptionsMenuClicked", id="003")
 	private DashboardType visibleType;
+	@Source(includes = "MapActivityOptionsMenuClicked", id="003")
 	private DashboardType previousVisibleType;
 	private ApplicationMode previousAppMode;
 	private boolean landscape;
@@ -604,6 +608,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				if (visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 					TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 					MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+					@Source(includes = "MapMarkersDoRoute", id="022")
 					List<MapMarker> markers = markersHelper.getSelectedMarkers();
 					if (markers.size() > 0) {
 						int i = 0;

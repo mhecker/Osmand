@@ -37,7 +37,7 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -1029,7 +1029,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public boolean onKeyDown(@Source(includes = "MapActivityOnKeyDown", id="001") int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && app.accessibilityEnabled()) {
 			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				Message msg = Message.obtain(uiHandler, new Runnable() {
@@ -1074,7 +1074,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
+	public boolean onKeyUp(@Source(includes = "MapActivityOnKeyUp", id="002") int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			if (!app.accessibilityEnabled()) {
 				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());

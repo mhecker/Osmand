@@ -13,6 +13,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.DeviceAdminRecv;
 import net.osmand.plus.OsmandApplication;
@@ -320,6 +321,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		@Source(includes = "SettingsNaviChangedInfo", id="082")
 		String id = preference.getKey();
 		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.ROUTER_SERVICE.getId())) {

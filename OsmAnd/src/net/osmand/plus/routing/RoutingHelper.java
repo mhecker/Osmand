@@ -30,6 +30,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.kit.joana.ui.annotations.Source;
+
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
 public class RoutingHelper {
@@ -57,7 +59,8 @@ public class RoutingHelper {
 	private boolean isPauseNavigation = false;
 	
 	private GPXRouteParamsBuilder currentGPXRoute = null;
-
+	
+	@Source(includes = "RouteInfo", id="040")
 	private RouteCalculationResult route = new RouteCalculationResult("");
 	
 	private LatLon finalLocation;
@@ -810,7 +813,7 @@ public class RoutingHelper {
 		private boolean paramsChanged;
 		private Thread prevRunningJob;
 
-		public RouteRecalculationThread(String name, RouteCalculationParams params, boolean paramsChanged) {
+		public RouteRecalculationThread(String name, @Source(includes = "RoutingParams", id="051") RouteCalculationParams params, boolean paramsChanged) {
 			super(name);
 			this.params = params;
 			this.paramsChanged = paramsChanged;

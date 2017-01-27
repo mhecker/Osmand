@@ -27,7 +27,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
-
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.core.android.MapRendererView;
@@ -1107,6 +1107,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("On long click event " + e.getX() + " " + e.getY()); //$NON-NLS-1$ //$NON-NLS-2$
 			}
+			
+			@Source(includes = "MapActivityOnLongPressed", id="004")
 			PointF point = new PointF(e.getX(), e.getY());
 			if ((accessibilityActions != null) && accessibilityActions.onLongClick(point, getCurrentRotatedTileBox())) {
 				return;

@@ -19,7 +19,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import edu.kit.joana.ui.annotations.Sink;
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -126,7 +127,7 @@ public class MapMarkerDialogHelper {
 	public AdapterView.OnItemClickListener getItemClickListener(final ArrayAdapter<Object> listAdapter) {
 		return new AdapterView.OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
+			public void onItemClick(AdapterView<?> adapterView, View view, @Source(includes = "MapMarkersActiveItemsClicked", id="021") int item, long l) {
 				Object obj = listAdapter.getItem(item);
 				if (obj instanceof MapMarker) {
 					MapMarker marker = (MapMarker) obj;
@@ -393,7 +394,9 @@ public class MapMarkerDialogHelper {
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
-								generateGPX(markersHelper.getActiveMapMarkers());
+								@Sink(mayInclude = "MapMarkersSaveGPX", id="024")
+								List<MapMarker> markers = markersHelper.getActiveMapMarkers();
+								generateGPX(markers);
 								return true;
 							}
 						});

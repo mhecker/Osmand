@@ -6,7 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.ColorInt;
-
+import edu.kit.joana.ui.annotations.Sink;
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
@@ -839,7 +840,7 @@ public class GPXUtilities {
            return writer.toString();
        }
 
-	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
+	public static String writeGpxFile(File fout, @Sink(mayInclude = {"TrackGpxInfo","PointGpxInfo","RouteGpxInfo","HistoryEntriesGpxInfo"}, id="0A2") GPXFile file, OsmandApplication ctx) {
 		Writer output = null;
 		try {
 			output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
@@ -1014,7 +1015,8 @@ public class GPXUtilities {
 		}
 		return text;
 	}
-
+	
+	@Source(includes = {"TrackGpxInfo","PointGpxInfo","RouteGpxInfo","HistoryEntriesGpxInfo"}, id="0A1")
 	public static GPXFile loadGPXFile(Context ctx, File f) {
 		FileInputStream fis = null;
 		try {

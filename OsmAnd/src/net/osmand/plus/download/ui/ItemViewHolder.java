@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -231,7 +231,7 @@ public class ItemViewHolder {
 		}
 	}
 
-	protected void download(IndexItem indexItem, DownloadResourceGroup parentOptional) {
+	protected void download(@Source(includes = "DownloadMapItemDownload", id="061") IndexItem indexItem, DownloadResourceGroup parentOptional) {
 		boolean handled = false;
 		if(parentOptional != null) {
 			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);

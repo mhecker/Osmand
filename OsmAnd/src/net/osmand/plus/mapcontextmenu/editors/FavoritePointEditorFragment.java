@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
@@ -148,6 +148,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Override
 	protected void save(final boolean needDismiss) {
+		@Source(includes = "MapContextMenuAddFavoriteInfo", id="005")
 		final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 				getNameTextValue(), getCategoryTextValue());
 		point.setDescription(getDescriptionTextValue());

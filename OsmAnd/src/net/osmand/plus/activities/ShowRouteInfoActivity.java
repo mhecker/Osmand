@@ -44,6 +44,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import edu.kit.joana.ui.annotations.Sink;
 
 
 /**
@@ -106,8 +107,10 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 				fw.close();
 				final Intent sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);
-				sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(((RouteInfoAdapter)getListAdapter()), 
-						helper.getGeneralRouteInformation()).toString()));
+				@Sink(mayInclude = "RoutingInfo", id="052")
+				String generatedHtml = generateHtml(((RouteInfoAdapter)getListAdapter()), 
+						helper.getGeneralRouteInformation()).toString();
+				sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generatedHtml));
 				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
 				sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
 				sendIntent.putExtra(
@@ -276,6 +279,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 		}
 
 		final String FILE_NAME = "route_info.html";
+		@Sink(mayInclude = "RoutingInfo", id="052")
 		StringBuilder html = generateHtmlPrint(routeInfo, title);
 		FileOutputStream fos = null;
 		try {

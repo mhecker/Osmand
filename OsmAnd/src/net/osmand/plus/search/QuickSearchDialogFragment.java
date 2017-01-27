@@ -36,7 +36,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import edu.kit.joana.ui.annotations.Sink;
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -438,6 +439,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 					@Override
 					public void afterTextChanged(Editable s) {
+						@Source(includes = "SearchInput", id="041")
 						String newQueryText = s.toString();
 						updateClearButtonAndHint();
 						updateClearButtonVisibility(true);
@@ -1407,13 +1409,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 
 				@Override
-				protected void onPostExecute(GPXFile gpxFile) {
+				protected void onPostExecute(@Sink(mayInclude = "HistoryShare", id="043") GPXFile gpxFile) {
 					hideProgressBar();
 					File dir = new File(getActivity().getCacheDir(), "share");
 					if (!dir.exists()) {
 						dir.mkdir();
 					}
 					File dst = new File(dir, "History.gpx");
+					
 					GPXUtilities.writeGpxFile(dst, gpxFile, app);
 
 					final Intent sendIntent = new Intent();

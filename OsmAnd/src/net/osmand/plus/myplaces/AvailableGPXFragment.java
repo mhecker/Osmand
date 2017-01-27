@@ -32,7 +32,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.IndexConstants;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
@@ -292,13 +292,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 			@Override
-			public boolean onQueryTextSubmit(String query) {
+			public boolean onQueryTextSubmit(@Source(includes = "MyPlacesMyTracksSearchInput", id="037") String query) {
 				allGpxAdapter.getFilter().filter(query);
 				return true;
 			}
 
 			@Override
-			public boolean onQueryTextChange(String newText) {
+			public boolean onQueryTextChange(@Source(includes = "MyPlacesMyTracksSearchInput", id="037") String newText) {
 				allGpxAdapter.getFilter().filter(newText);
 				return true;
 			}
@@ -949,7 +949,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void openPopUpMenu(View v, final GpxInfo gpxInfo) {
+	private void openPopUpMenu(View v, @Source(includes = "MyPlacesMyTracksShare", id="036") final GpxInfo gpxInfo) {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
@@ -1204,6 +1204,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		return true;
 	}
 
+	//@Source(mayInclude = "GpxInfo", id="020")
 	public static class GpxInfo {
 		public boolean currentlyRecordingTrack;
 		public GPXFile gpx;

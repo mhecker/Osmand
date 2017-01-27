@@ -32,6 +32,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.kit.joana.ui.annotations.Sink;
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -180,6 +182,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		if (selectionMode) {
 			CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
+			
+			@Source(includes = "MyPlacesMyFavouritePOIClicked", id="033")
 			FavouritePoint model = favouritesAdapter.getChild(groupPosition, childPosition);
 			ch.setChecked(!ch.isChecked());
 			if (ch.isChecked()) {
@@ -228,13 +232,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		MenuItemCompat.setActionView(mi, searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
-			public boolean onQueryTextSubmit(String query) {
+			public boolean onQueryTextSubmit(@Source(includes = "MyPlacesMyFavouriteSearchInput", id="032") String query) {
 				favouritesAdapter.getFilter().filter(query);
 				return true;
 			}
 
 			@Override
-			public boolean onQueryTextChange(String newText) {
+			public boolean onQueryTextChange(@Source(includes = "MyPlacesMyFavouriteSearchInput", id="032") String newText) {
 				favouritesAdapter.getFilter().filter(newText);
 				return true;
 			}
@@ -442,6 +446,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				int clr = list.get(colorSpinner.getSelectedItemPosition());
+				@Source(includes = "MyPlacesMyFavouriteGroupNameEdited", id="034")
 				String name = nameEditText.getText().toString();
 				boolean nameChanged = !Algorithms.objectEquals(group.name, name);
 				if (clr != intColor || group.visible != checkBox.isChecked() || nameChanged) {
@@ -526,7 +531,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 						Algorithms.fileCopy(src, dst);
 						final Intent sendIntent = new Intent();
 						sendIntent.setAction(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtmlPrint().toString()));
+						@Sink(mayInclude = "FavoritesLocations", id="010")
+						String generatedHtml = generateHtmlPrint().toString();
+						sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generatedHtml));
 						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
 						sendIntent.putExtra(Intent.EXTRA_STREAM,
 								FileProvider.getUriForFile(getActivity(),
@@ -630,6 +637,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	class FavouritesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
 		private static final boolean showOptionsButton = false;
+		@Source(includes = "MyPlacesMyFavouriteGroup", id="031")
 		Map<FavoriteGroup, List<FavouritePoint>> favoriteGroups = new LinkedHashMap<>();
 		List<FavoriteGroup> groups = new ArrayList<FavoriteGroup>();
 		Filter myFilter;

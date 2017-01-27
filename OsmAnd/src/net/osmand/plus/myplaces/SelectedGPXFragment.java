@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
+import edu.kit.joana.ui.annotations.Sink;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -287,6 +287,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {
+							@Sink(mayInclude = "TrackShare", id="053")
 							final Uri fileUri = Uri.fromFile(new File(getGpx().path));
 							final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 							sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);

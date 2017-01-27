@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -616,8 +616,9 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(R.drawable.ic_action_fav_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, @Source(includes = "MapActivityOptionsMenuClicked", id="003") int itemId, int pos, boolean isChecked) {
 						app.logEvent(mapActivity, "drawer_myplaces_open");
+						
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getFavoritesActivity());
 						newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -630,7 +631,7 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(R.drawable.ic_action_search_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, @Source(includes = "MapActivityOptionsMenuClicked", id="003") int itemId, int pos, boolean isChecked) {
 						app.logEvent(mapActivity, "drawer_search_open");
 						mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 						return true;
@@ -764,7 +765,7 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(R.drawable.ic_action_settings)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, @Source(includes = "MapActivityOptionsMenuClicked", id="003") int itemId, int pos, boolean isChecked) {
 						app.logEvent(mapActivity, "drawer_settings_open");
 						final Intent settings = new Intent(mapActivity, getMyApplication().getAppCustomization()
 								.getSettingsActivity());
@@ -791,7 +792,7 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(R.drawable.ic_action_help)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, @Source(includes = "MapActivityOptionsMenuClicked", id="003") int itemId, int pos, boolean isChecked) {
 						app.logEvent(mapActivity, "drawer_help_open");
 						Intent intent = new Intent(mapActivity, HelpActivity.class);
 						intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

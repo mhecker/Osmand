@@ -35,6 +35,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ContextMenuAdapter;
@@ -295,6 +296,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
+									@Source(includes = "DownloadMapItemRename", id="062")
 									String newName = editText.getText().toString() + ext;
 									if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(newName).find()) {
 										Toast.makeText(a, R.string.file_name_containes_illegal_char,

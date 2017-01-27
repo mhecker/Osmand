@@ -25,7 +25,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
@@ -459,6 +459,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		@Source(includes = "SettingsGerneralChangedInfo", id="081")
 		String id = preference.getKey();
 		if (id.equals(settings.VOICE_PROVIDER.getId())) {
 			if (MORE_VALUE.equals(newValue)) {

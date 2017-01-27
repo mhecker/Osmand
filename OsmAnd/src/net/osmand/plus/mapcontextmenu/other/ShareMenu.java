@@ -3,7 +3,7 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
+import edu.kit.joana.ui.annotations.Source;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -67,7 +67,7 @@ public class ShareMenu extends BaseMenuController {
 		return title;
 	}
 
-	public static void show(LatLon latLon, String title, MapActivity mapActivity) {
+	public static void show(@Source(includes = "MapContextMenuShareInfo", id="006") LatLon latLon, String title, MapActivity mapActivity) {
 
 		ShareMenu menu = new ShareMenu(mapActivity);
 
